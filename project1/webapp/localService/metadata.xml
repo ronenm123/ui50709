@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZNETWORK_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="zaufk" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Aufnr"/>
+                </Key>
+                <Property Name="Aufnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Order" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ktext" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="AUFKTOAFVC" Relationship="ZNETWORK_SRV.AUFKTOAFVC" FromRole="FromRole_AUFKTOAFVC" ToRole="ToRole_AUFKTOAFVC"/>
+            </EntityType>
+            <EntityType Name="zafvc" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Aufnr"/>
+                    <PropertyRef Name="Vornr"/>
+                </Key>
+                <Property Name="Aufnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Order" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vornr" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Activity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ltxa1" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Opr. short text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="AUFKTOAFVC" sap:content-version="1">
+                <End Type="ZNETWORK_SRV.zaufk" Multiplicity="1" Role="FromRole_AUFKTOAFVC"/>
+                <End Type="ZNETWORK_SRV.zafvc" Multiplicity="*" Role="ToRole_AUFKTOAFVC"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_AUFKTOAFVC">
+                        <PropertyRef Name="Aufnr"/>
+                    </Principal>
+                    <Dependent Role="ToRole_AUFKTOAFVC">
+                        <PropertyRef Name="Aufnr"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZNETWORK_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="zaufkSet" EntityType="ZNETWORK_SRV.zaufk" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="zafvcSet" EntityType="ZNETWORK_SRV.zafvc" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="AUFKTOAFVCSet" Association="ZNETWORK_SRV.AUFKTOAFVC" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zaufkSet" Role="FromRole_AUFKTOAFVC"/>
+                    <End EntitySet="zafvcSet" Role="ToRole_AUFKTOAFVC"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://s4hana1909.server.com:8701/sap/opu/odata/sap/ZNETWORK_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://s4hana1909.server.com:8701/sap/opu/odata/sap/ZNETWORK_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

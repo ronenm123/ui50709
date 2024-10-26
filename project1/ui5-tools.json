@@ -1,0 +1,19 @@
+{
+  "deployer": {
+    "type": "Gateway",
+    "options": {
+      "conn": {
+        "server": "http://s4hana1909.server.com:8701",
+        "client": "800"
+      },
+      "ui5": {
+        "language": "EN",
+        "package": "$TMP",
+        "bspcontainer": "Z123",
+        "bspcontainer_text": "TEST RONEN",
+        "calc_appindex": true,
+        "transportno": "S4HK901406"
+      }
+    }
+  }
+}
